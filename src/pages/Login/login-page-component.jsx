@@ -15,6 +15,7 @@ const Login = (props) =>
                     <Description>
                         Get Premier Access to all shows and movies exclusive only on Disney+. The Subscription fee as of the month of May'21 for Disney+ and Disney Bundle will increase by $1.
                     </Description>
+                    <CTAlogoTwo src="/images/cta-logo-two.png" alt="" />
                 </CTA>
                 <BgImage/>
             </Content>
@@ -107,7 +108,23 @@ const SignUp = styled.a`
 
 `
 
-const Description = styled.h2``
+const Description = styled.p`
+
+    color: hsla(0, 0%, 95.3%, 1);
+    font-size: 17px;
+    margin:  0 0 24px;
+    line-height: 1.5;
+    letter-spacing: 1.5px;
+
+`
+
+const CTAlogoTwo = styled.img`
+
+    max-width : 650px;
+    width: 100%;
+    margin-bottom: 20px;
+
+`
 
 
 export default Login;
