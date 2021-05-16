@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 // import ctaOne from '../../images/cta-logo-one.svg'
 
-const Login = (props) =>
+const LoginPage = (props) =>
 {
     return(
         <Container>
@@ -127,4 +127,4 @@ const CTAlogoTwo = styled.img`
 `
 
 
-export default Login;
+export default LoginPage;

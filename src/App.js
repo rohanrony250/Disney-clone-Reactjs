@@ -1,6 +1,6 @@
 import {BrowserRouter as Router, Switch , Route} from "react-router-dom"
-import Login from "./pages/Login/login-page-component"
-import Header from "./components/Header-Component"
+import LoginPage from "./pages/Login/login-page-component"
+import Header from "./components/Header-Component.jsx"
 import './App.css';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
         <Header />
         <Switch>
           <Route exact path='/'>
-            <Login />
+            <LoginPage />
           </Route>
         </Switch>
       </Router>
