@@ -61,7 +61,7 @@ const Header = (props) =>
                     </span>
                 </a>                
             </NavMenu>
-            <Login onClick ={handleAuth}>
+            <Login onClick = {handleAuth}>
                 LOGIN
             </Login>
         </Nav>
