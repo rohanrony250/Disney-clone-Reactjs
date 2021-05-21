@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import styled from "styled-components"
 import { auth, provider } from "../Firebase/firebase"
 import {useDispatch, useSelector} from "react-redux"
@@ -13,35 +13,46 @@ const Header = (props) =>
     const userPhoto = useSelector(selectUserPhoto)
     const handleAuth = () =>
     {
-        auth.signInWithPopup(provider).then((result) =>
+        if(!username)
         {
-            setUser(result.user);
-        }).catch((err) =>
+            auth.signInWithPopup(provider).then((result) =>
+            {
+                setUser(result.user);
+            }).catch((err) =>
+            {
+                console.log(err.message)
+            })
+        }
+        else if(username) 
         {
-            console.log(err.message)
-        })
+            auth.signOut().then((result)=>
+            {
+                console.log("user signed out")
+                dispatch(setSignOutState())
+                history.push("/")
+
+            }).catch((err)=>
+            {
+                console.log(err.message)
+            })
+        }
     }
-    
-    const handleLogout = () =>
+
+    useEffect(()=>
     {
-        auth.signOut().then((result)=>
+        auth.onAuthStateChanged(async (user)=>
         {
-            console.log("user signed out")
-            setUser("logout")
-
-        }).catch((err)=>
-        {
-            console.log(err.message)
+            if(user)
+            {
+                setUser(user)
+                history.push("/home")
+            }
         })
-    }
-
+    }, [username]) //dependancy on which this useEffect works, which means that this useEffect will run only when the USERNAME variale has been updated.
+    
+   
     const setUser = (user) =>
     {
-        
-        if(user == "logout")
-        {
-            dispatch(setSignOutState())
-        }
         
         dispatch(
             setUserLoginDetails(
@@ -104,10 +115,17 @@ const Header = (props) =>
                             </span>
                         </a>                
                     </NavMenu>
-                    <UserImg src = {userPhoto} alt="user-display-picture" onClick={handleLogout}/>
+                    <SignOut>
+                        <UserImg src = {userPhoto} alt="user-display-picture"/>
+                        <Dropdown onClick={handleAuth}>
+                            <span>
+                                Sign Out
+                            </span>
+                        </Dropdown>
+                    </SignOut>
                 </>
             }
-            
+        
         </Nav>
     )
 }
@@ -236,6 +254,46 @@ const UserImg  =styled.img`
     cursor: pointer;
 
 `
+
+const Dropdown = styled.div`
+
+    position: absolute;
+    top: 100%;
+    right: -10%;
+    background: rgb(19,19,19);
+    border: 1px solid rgba(151, 151, 0.34);
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: rgb(0 0 0/50%) 0px 0px 18px 0px;
+    font-size: 14px;
+    letter-spacing: 3px;
+    width: 130px;
+    opacity: 0;
+
+
+`
+
+const SignOut = styled.div`
+
+    position: relative;
+    height: 70px;
+    width: 70px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+
+    &:hover
+    {
+        ${Dropdown}
+        {
+            opacity: 1;
+            transition-duration: 1s;
+        }
+    }
+`
+
+
 
 
 export default Header; 
