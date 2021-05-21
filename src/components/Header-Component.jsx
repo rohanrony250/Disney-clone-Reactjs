@@ -258,16 +258,16 @@ const UserImg  =styled.img`
 const Dropdown = styled.div`
 
     position: absolute;
-    top: 100%;
-    right: -10%;
+    top: 18%;
+    right: 130%;
     background: rgb(19,19,19);
     border: 1px solid rgba(151, 151, 0.34);
     border-radius: 4px;
-    padding: 10px;
+    padding: 6px;
     box-shadow: rgb(0 0 0/50%) 0px 0px 18px 0px;
     font-size: 14px;
     letter-spacing: 3px;
-    width: 130px;
+    width: 100px;
     opacity: 0;
 
 
@@ -276,8 +276,8 @@ const Dropdown = styled.div`
 const SignOut = styled.div`
 
     position: relative;
-    height: 70px;
-    width: 70px;
+    height: 48px;
+    width: 48px;
     display: flex;
     cursor: pointer;
     align-items: center;
