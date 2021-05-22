@@ -22,7 +22,7 @@ const ImgSlider = (props) =>
             <Carousel {...settings}>
                 <Wrap>
                     <a>
-                        <img src = "/images/slider-badging.jpg" alt = ""/>
+                        <img src = "/images/slider-scale.jpg" alt = ""/>
                     </a>
                 </Wrap>
                 <Wrap>
@@ -37,7 +37,7 @@ const ImgSlider = (props) =>
                 </Wrap>
                 <Wrap>
                     <a>
-                        <img src = "/images/slider-scale.jpg" alt = ""/>
+                        <img src = "/images/slider-badging.jpg" alt = ""/>
                     </a>
                 </Wrap>
             </Carousel>
@@ -109,6 +109,22 @@ const Wrap = styled.div`
         display: block;
         position: relative;
         padding: 4px;
+
+        img
+        {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        &:hover
+        {
+            padding: 0px;
+            border: 2px solid rgba(249, 249, 249, 0.8);
+            
+            transition: 200ms;
+            
+        }
     }
 
 `
