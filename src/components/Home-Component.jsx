@@ -27,30 +27,42 @@ const Home = (props) =>
         {
             snapshot.docs.map((doc) =>
             {
+                
                 switch(doc.data().type)
                 {
                     case 'recommend':
-                        recommendations.push({id : doc.id, ...doc})
+                        // break;
+                        recommendations = [...recommendations, {id : doc.id, ...doc.data()}]
+                        console.log(recommendations)
+                        break;
                     case 'new':
-                        newDisney.push({id : doc.id, ...doc})
+                        newDisney = [...newDisney, {id : doc.id, ...doc.data()}]
+                        break
                     case 'trending':
-                        trending.push({id : doc.id, ...doc})
+                        trending = [...trending, {id : doc.id, ...doc.data()}]
+                        break;
                     case 'original':
-                        originals.push({id : doc.id, ...doc})
+                        originals = [...originals, {id : doc.id, ...doc.data()}]
+                        break;
+                    default:
+                        alert("No data found ... oops!")
+                        break;
                 }
             })
+
+            dispatch(
+                setMovies(
+                    {
+                        recommend: recommendations,
+                        newDisney: newDisney,
+                        original: originals,
+                        trending: trending
+                    }
+                )
+            )
         })
 
-        dispatch(
-            setMovies(
-                {
-                    recommend: recommendations,
-                    newDisney: newDisney,
-                    original: originals,
-                    trending: trending
-                }
-            )
-        )
+        
     }, [userName])
 
     

@@ -1,8 +1,11 @@
 import styled from "styled-components"
 import {Link} from "react-router-dom"
-
+import {useSelector} from "react-redux"
+import {selectTrending} from "../features/Movie/movieSlice"
 const TopFour = (props) =>
 {
+    const movies = useSelector(selectTrending)
+    
     return(
         <Container>
             <h4>
@@ -10,26 +13,19 @@ const TopFour = (props) =>
             </h4>
 
             <Content>
-                <Wrap>
-                    <Link to = "/">
-                        <img src = "" alt = "" />
-                    </Link> 
-                </Wrap>
-                <Wrap>
-                    <Link to = "/">
-                        <img src = "" alt = "" />
-                    </Link> 
-                </Wrap>
-                <Wrap>
-                    <Link to = "/">
-                        <img src = "" alt = "" />
-                    </Link> 
-                </Wrap>
-                <Wrap>
-                    <Link to = "/">
-                        <img src = "" alt = "" />
-                    </Link> 
-                </Wrap>
+                {
+                    movies && movies.map((movie, key) =>
+                    (
+                        <Wrap key = {key}>
+                            {
+                                movie.id
+                            }
+                            <Link>
+                                <img src={movie.cardImg} alt={movie.titles} />
+                            </Link>
+                        </Wrap>
+                    ))
+                }
             </Content>
         </Container>
         
@@ -80,7 +76,7 @@ const Wrap = styled.div`
         inset: 0px;
         display: block;
         height: 100%;
-        object-fit: cover;
+        /* object-fit: cover; */
         opacity: 1;
         position: absolute;
         transition: opactiy 500ms ease-in-out 0s;
