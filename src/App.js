@@ -3,6 +3,7 @@ import LoginPage from "./pages/Login/login-page-component"
 import Header from "./components/Header-Component.jsx"
 import './App.css';
 import Home from "./components/Home-Component";
+import Details from "./components/Details-Component"
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
           </Route>
           <Route path="/home">
             <Home/>
+          </Route>
+          <Route path = "/details/:id">
+            <Details />
           </Route>
         </Switch>
       </Router>

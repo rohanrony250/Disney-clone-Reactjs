@@ -20,7 +20,7 @@ const TopFour = (props) =>
                             {
                                 movie.id
                             }
-                            <Link>
+                            <Link to = {"/detail/" + movie.id}>
                                 <img src={movie.cardImg} alt={movie.titles} />
                             </Link>
                         </Wrap>
