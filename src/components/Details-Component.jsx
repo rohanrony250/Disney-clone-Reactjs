@@ -1,5 +1,5 @@
 import styled from "styled-components"
-
+import React from "react"
 
 
 const DetailsComponent = (props) =>
@@ -17,7 +17,19 @@ const DetailsComponent = (props) =>
 
             <ContentMeta>
                 <Controls>
-                    controls
+                    <Player>
+                        <img src="/images/play-icon-black.png" alt=""/>
+                        <span>
+                            PLAY
+                        </span>
+                    </Player>
+                    <Trailer>
+                        <img src="/images/play-icon-white.png" alt="" />
+                        <span>
+                            play trailer
+                        </span>
+                    </Trailer>
+                    
                 </Controls>
             </ContentMeta>
         </Container>
@@ -99,6 +111,58 @@ const Controls = styled.div`
     flex-flow: row reverse;
     margin: 24px 0px;
     min-height: 56px;
+
+
+`
+
+const Player = styled.button`
+
+    font-size: 15px;
+    margin: 0px 22px 0px 0px;
+    padding: 0px 24px;
+    height: 56px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1.8px;
+    text-align: center;
+    text-transform: uppercase;
+    background: rgb(249, 249, 249);
+    border: none;
+    color: rgb(0, 0, 0);
+
+    img
+    {
+        width: 32px;
+    }
+
+    &:hover
+    {
+        background: rgb(198, 198, 198);
+    }
+
+    @media (max-width: 768px)
+    {
+        height:45px;
+        padding: 0px 12px;
+        font-size: 12px;
+        margin: 0px 10px 0px 0px;
+
+        img
+        {
+            width: 25px;
+        }
+    }
+
+`
+
+const Trailer  = styled(Player)`
+
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgb(249, 249, 249);
+    color: rgb(249, 249, 249);
 
 
 `
