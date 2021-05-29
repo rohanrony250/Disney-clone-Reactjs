@@ -8,6 +8,7 @@ const DetailsComponent = (props) =>
 {
     
     const {id} = useParams()
+    // console.log(id)
     const [detailData, setDetailData] = useState({})
     useEffect(() =>
     {
@@ -33,11 +34,11 @@ const DetailsComponent = (props) =>
     return(
         <Container>
             <Background>
-                <img src="" alt="" />
+                <img src={detailData.backgroundImg} alt={detailData.title} />
             </Background>
 
             <ImageTitle>
-                <img src="" alt="" />
+                <img src={detailData.titleImg} alt={detailData.title} />
             </ImageTitle>
 
 
@@ -67,10 +68,10 @@ const DetailsComponent = (props) =>
                     </GroupWatch>
                 </Controls>
                 <SubTitle>
-                    SUBTITLE
+                    {detailData.subTitle}
                 </SubTitle>
                 <Description>
-                    DESCRIPTION
+                    {detailData.description}
                 </Description>
             </ContentMeta>
         </Container>
