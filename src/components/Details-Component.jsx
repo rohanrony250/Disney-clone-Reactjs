@@ -1,9 +1,35 @@
 import styled from "styled-components"
 import React from "react"
-
+import db from "../Firebase/firebase"
+import {useState, useEffect} from "react"
+import {useParams} from "react-router-dom"
 
 const DetailsComponent = (props) =>
 {
+    
+    const {id} = useParams()
+    const [detailData, setDetailData] = useState({})
+    useEffect(() =>
+    {
+        db.collection('movies').doc(id)
+            .get()
+            .then((doc) =>
+            {
+                if(doc.exists)
+                {
+                    setDetailData(doc.data())
+                }
+                else
+                {
+                    console.log("No such data in database!")
+                }
+            }).catch((errors) => {
+                console.log("error getting data : ", errors)
+            })
+
+        
+    }, [id])
+    
     return(
         <Container>
             <Background>
@@ -29,8 +55,23 @@ const DetailsComponent = (props) =>
                             play trailer
                         </span>
                     </Trailer>
-                    
+
+                    <AddList>
+                        <span />
+                        <span />
+                    </AddList>
+                    <GroupWatch>
+                        <div>
+                            <img src="/images/group-icon.png" alt="" />
+                        </div>
+                    </GroupWatch>
                 </Controls>
+                <SubTitle>
+                    SUBTITLE
+                </SubTitle>
+                <Description>
+                    DESCRIPTION
+                </Description>
             </ContentMeta>
         </Container>
     )
@@ -163,6 +204,91 @@ const Trailer  = styled(Player)`
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgb(249, 249, 249);
     color: rgb(249, 249, 249);
+
+
+`
+
+
+const AddList = styled.div`
+
+    margin-right: 16px;
+    height: 44px;
+    width: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+
+    span
+    {
+        background-color: rgb(249, 249, 249);
+        display: inline-block;
+
+        &:first-child
+        {
+            height: 2px;
+            transform: translate(8.5px, 0px) rotate(0deg);
+            width: 16px;
+        }
+
+        &:nth-child(2)
+        {
+            height: 2px;
+            transform: translate(-8px, 0px) rotate(90deg);
+            width: 16px;
+        }
+    }
+
+`
+
+const GroupWatch = styled.div`
+
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: white;
+    div
+    {
+        height: 40px;
+        width: 40px;
+        background: rgb(0, 0, 0);
+        border-radius: 50%;
+        display: flex;
+    }
+
+`
+
+const SubTitle = styled.div`
+
+    color: rgb(249, 249, 249);
+    font-size: 15px;
+    min-height: 28px;
+
+    @media(max-width: 768px)
+    {
+        font-size: 12px;
+    }
+
+`
+
+const Description = styled.div`
+
+    line-height: 1.4;
+    font-size: 20px;
+    padding: 16px 0px;
+    color: rgb(249, 249, 249);
+
+    @media(max-width: 768px)
+    {
+        font-size: 14px;
+    }
 
 
 `
